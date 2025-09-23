@@ -69,5 +69,8 @@ install_ti_packages_apt
 SCRIPT_PATH=$(pwd)/$(dirname $0)
 cd $SCRIPT_PATH/../third_party/ti_simplelink_sdk/repo_cc13xx_cc26xx/
 git apply ../../../patch/bootloader-backdoor-custom.patch
+git apply ../../../patch/antanna-path-custom.patch
+cd $SCRIPT_PATH/../openthread
+git apply ../../../patch/calib.patch
 cd $SCRIPT_PATH/..
 

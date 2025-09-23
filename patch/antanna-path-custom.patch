@@ -1,0 +1,309 @@
+diff --git a/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c b/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c
+index db4a19916..fbed00faa 100644
+--- a/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c
++++ b/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c
+@@ -221,43 +221,18 @@ void rfDriverCallback(RF_Handle client, RF_GlobalEvent events, void *arg)
+             default:break;
+         }
+ 
+-        if (sub1GHz) {
+-            /* Sub-1 GHz */
+-            if (paType == RF_TxPowerTable_HighPA) {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> Sub-1 GHz
+-                 */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_RFC_GPO0);
+-            } else {
+-                /* RF core active --> Sub-1 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setOutputValue(Board_RF_SUB1GHZ, 1);
+-            }
+-        } else {
+-            /* 2.4 GHz */
+-            if (paType == RF_TxPowerTable_HighPA)
+-            {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> 2.4 GHz
+-                 */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_RFC_GPO0);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-            } else {
+-                /* RF core active --> 2.4 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+-            }
++        /* 2.4 GHz */
++        if (paType == RF_TxPowerTable_HighPA)
++        {
++            /* PA enable --> HIGH PA
++             */
++            PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
++        }
++        else
++        {
++            /* RF core active --> 2.4 GHz */
++            PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
++            PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+         }
+     } else {
+         /* Reset the IO multiplexer to GPIO functionality */
+diff --git a/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c b/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c
+index e3c5bcc9c..36deda1ed 100644
+--- a/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c
++++ b/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c
+@@ -221,43 +221,18 @@ void rfDriverCallback(RF_Handle client, RF_GlobalEvent events, void *arg)
+             default:break;
+         }
+ 
+-        if (sub1GHz) {
+-            /* Sub-1 GHz */
+-            if (paType == RF_TxPowerTable_HighPA) {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> Sub-1 GHz
+-                 */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_RFC_GPO0);
+-            } else {
+-                /* RF core active --> Sub-1 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setOutputValue(Board_RF_SUB1GHZ, 1);
+-            }
+-        } else {
+-            /* 2.4 GHz */
+-            if (paType == RF_TxPowerTable_HighPA)
+-            {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> 2.4 GHz
+-                 */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_RFC_GPO0);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-            } else {
+-                /* RF core active --> 2.4 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+-            }
++        /* 2.4 GHz */
++        if (paType == RF_TxPowerTable_HighPA)
++        {
++            /* PA enable --> HIGH PA
++             */
++            PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
++        }
++        else
++        {
++            /* RF core active --> 2.4 GHz */
++            PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
++            PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+         }
+     } else {
+         /* Reset the IO multiplexer to GPIO functionality */
+diff --git a/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c b/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c
+index 269f48b72..97c406acb 100644
+--- a/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c
++++ b/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c
+@@ -221,43 +221,18 @@ void rfDriverCallback(RF_Handle client, RF_GlobalEvent events, void *arg)
+             default:break;
+         }
+ 
+-        if (sub1GHz) {
+-            /* Sub-1 GHz */
+-            if (paType == RF_TxPowerTable_HighPA) {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> Sub-1 GHz
+-                 */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_RFC_GPO0);
+-            } else {
+-                /* RF core active --> Sub-1 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setOutputValue(Board_RF_SUB1GHZ, 1);
+-            }
+-        } else {
+-            /* 2.4 GHz */
+-            if (paType == RF_TxPowerTable_HighPA)
+-            {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> 2.4 GHz
+-                 */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_RFC_GPO0);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-            } else {
+-                /* RF core active --> 2.4 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+-            }
++        /* 2.4 GHz */
++        if (paType == RF_TxPowerTable_HighPA)
++        {
++            /* PA enable --> HIGH PA
++             */
++            PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
++        }
++        else
++        {
++            /* RF core active --> 2.4 GHz */
++            PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
++            PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+         }
+     } else {
+         /* Reset the IO multiplexer to GPIO functionality */
+diff --git a/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js b/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js
+index 41bb2d088..dfbb13310 100644
+--- a/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js
++++ b/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js
+@@ -63,7 +63,7 @@ const LaunchPadMap = {
+ };
+ 
+ // Targets with 10 dBm High PA
+-const TargetPA10 = ["LAUNCHXL-CC1352P-4", "LP_CC2652PSIP", "LP_CC1352P7-4",
++const TargetPA10 = ["LAUNCHXL-CC1352P-4", "LP_CC2652PSIP",
+     "LP_CC2651P3, 10DBM", "LP_CC2653P10, 10DBM", "LP_EM_CC1354P10_6",
+     "LP_EM_CC2674P10_RSK", "LP_CC2674P10_RGZ, 10DBM"];
+ 
+diff --git a/source/ti/drivers/.meta/rf/RF.Board.c.xdt b/source/ti/drivers/.meta/rf/RF.Board.c.xdt
+index 972a3f1c0..d092299a4 100644
+--- a/source/ti/drivers/.meta/rf/RF.Board.c.xdt
++++ b/source/ti/drivers/.meta/rf/RF.Board.c.xdt
+@@ -477,41 +477,18 @@ void __attribute__((weak)) `callbackFxn`AntennaSwitching(RF_Handle client, RF_Gl
+             default:break;
+         }
+ 
+-        if (sub1GHz) {
+-            /* Sub-1 GHz */
+-            if (paType == RF_TxPowerTable_HighPA) {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> Sub-1 GHz
+-                 */
+-                GPIO_setConfigAndMux(CONFIG_RF_24GHZ, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO3);
+-                GPIO_setConfigAndMux(CONFIG_RF_SUB1GHZ, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+-            } else {
+-                /* RF core active --> Sub-1 GHz */
+-                GPIO_setConfigAndMux(CONFIG_RF_24GHZ, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-                GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-                GPIO_setConfigAndMux(CONFIG_RF_SUB1GHZ, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH, IOC_PORT_GPIO);
+-            }
+-        } else {
+-            /* 2.4 GHz */
+-            if (paType == RF_TxPowerTable_HighPA)
+-            {
+-                /* PA enable --> HIGH PA
+-                 * LNA enable --> 2.4 GHz
+-                 */
+-                GPIO_setConfigAndMux(CONFIG_RF_24GHZ, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+-                /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+-                         de-asserted on CC1352 Rev A. */
+-                GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO3);
+-                GPIO_setConfigAndMux(CONFIG_RF_SUB1GHZ, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-            } else {
+-                /* RF core active --> 2.4 GHz */
+-                GPIO_setConfigAndMux(CONFIG_RF_24GHZ, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH, IOC_PORT_GPIO);
+-                GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-                GPIO_setConfigAndMux(CONFIG_RF_SUB1GHZ, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-            }
++        /* 2.4 GHz */
++        if (paType == RF_TxPowerTable_HighPA)
++        {
++            /* PA enable --> HIGH PA
++            */
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
++        }
++        else
++        {
++            /* RF core active --> 2.4 GHz */
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++            GPIO_write(CONFIG_RF_HIGH_PA, 1);
+         }
+ % } else if (antennaSwitchName === "XMSSJJ3G0PA-054") {
+         /* Switch off all paths. */
+@@ -521,17 +498,18 @@ void __attribute__((weak)) `callbackFxn`AntennaSwitching(RF_Handle client, RF_Gl
+         /* Decode the current PA configuration. */
+         RF_TxPowerTable_PAType paType = (RF_TxPowerTable_PAType)RF_getTxPower(client).paType;
+ 
+-        if (paType == RF_TxPowerTable_HighPA) {
+-            /*
+-            * Mux GPIOs to RF Core signals:
+-            * - High PA    --> HIGH_PA
+-            * - LNA enable --> STANDARD_PA
++        /* 2.4 GHz */
++        if (paType == RF_TxPowerTable_HighPA)
++        {
++            /* PA enable --> HIGH PA
+             */
+-            GPIO_setConfigAndMux(CONFIG_RF_STANDARD_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+-            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO3);
+-        } else {
+-            /* RF Core active --> 5_DBM */
+-            GPIO_write(CONFIG_RF_STANDARD_PA, 1);
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
++        }
++        else
++        {
++            /* RF core active --> 2.4 GHz */
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++            GPIO_write(CONFIG_RF_HIGH_PA, 1);
+         }
+ % } else if (antennaSwitchName === "RTC6608OU") {
+         /* Switch off all paths. */
+@@ -541,17 +519,18 @@ void __attribute__((weak)) `callbackFxn`AntennaSwitching(RF_Handle client, RF_Gl
+         /* Decode the current PA configuration. */
+         RF_TxPowerTable_PAType paType = (RF_TxPowerTable_PAType)RF_getTxPower(client).paType;
+ 
+-        if (paType == RF_TxPowerTable_HighPA) {
+-            /*
+-            * Mux GPIOs to RF Core signals:
+-            * - High PA    --> HIGH PA
+-            * - LNA enable --> `antennaPathSupport.displayName`
++        /* 2.4 GHz */
++        if (paType == RF_TxPowerTable_HighPA)
++        {
++            /* PA enable --> HIGH PA
+             */
+-            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT,IOC_PORT_RFC_GPO3);
+-            GPIO_setConfigAndMux(`antennaPathSupport.pinSymbol`, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+-        } else {
+-            /* RF Core active --> `antennaPathSupport.displayName` */
+-            GPIO_write(`antennaPathSupport.pinSymbol`, 1);
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
++        }
++        else
++        {
++            /* RF core active --> 2.4 GHz */
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++            GPIO_write(CONFIG_RF_HIGH_PA, 1);
+         }
+ % } else {
+         /* No support implemented for antenna switch '`antennaSwitchName`' */
