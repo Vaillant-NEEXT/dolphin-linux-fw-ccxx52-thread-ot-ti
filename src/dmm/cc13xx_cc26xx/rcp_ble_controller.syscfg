@@ -221,6 +221,7 @@ if(rfDesignSettings.rfDesign == "LAUNCHXL-CC1352P-2" || rfDesignSettings.rfDesig
     bleRadioSetModule.highPA = true;
     if(rfDesignSettings.rfDesign == "LAUNCHXL-CC1352P-4" || rfDesignSettings.rfDesign == "LP_CC2652PSIP" || rfDesignSettings.rfDesign == "LP_CC1352P7-4" || rfDesignSettings.rfDesign == "LP_EM_CC1354P10_6")
     {
+        /* */
         bleRadioSetModule.txPowerHi = "10";
     }
 }

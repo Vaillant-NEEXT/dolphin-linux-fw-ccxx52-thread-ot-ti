@@ -1,0 +1,315 @@
+diff --git a/source/ti/ble5stack/.meta/rf_config/ble_rf_config.syscfg.js b/source/ti/ble5stack/.meta/rf_config/ble_rf_config.syscfg.js
+index 2f9f990f5..b4800ddb9 100644
+--- a/source/ti/ble5stack/.meta/rf_config/ble_rf_config.syscfg.js
++++ b/source/ti/ble5stack/.meta/rf_config/ble_rf_config.syscfg.js
+@@ -356,6 +356,7 @@ function moduleInstances(inst)
+             args.highPA = true;
+             if(inst.rfDesign == "LAUNCHXL-CC1352P-4" || inst.rfDesign == "LP_CC1352P7-4" || inst.rfDesign == "LP_CC2652PSIP" || inst.rfDesign == "LP_EM_CC1354P10_6")
+             {
++                /* */
+                 args.phyType = "bt5le2mp10";
+                 args.txPowerHi = "10";
+             }
+diff --git a/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c b/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c
+index db4a19916..449b81d64 100644
+--- a/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c
++++ b/source/ti/ble5stack/boards/CC1352P1_LAUNCHXL/CC1352P1_LAUNCHXL_fxns.c
+@@ -246,16 +246,12 @@ void rfDriverCallback(RF_Handle client, RF_GlobalEvent events, void *arg)
+                 /* PA enable --> HIGH PA
+                  * LNA enable --> 2.4 GHz
+                  */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_RFC_GPO0);
+                 /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+                          de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
+-            } else {
++                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
++           } else {
+                 /* RF core active --> 2.4 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
++                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
+                 PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+             }
+         }
+diff --git a/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c b/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c
+index e3c5bcc9c..c3cfa9d84 100644
+--- a/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c
++++ b/source/ti/ble5stack/boards/CC1352P_2_LAUNCHXL/CC1352P_2_LAUNCHXL_fxns.c
+@@ -246,16 +246,12 @@ void rfDriverCallback(RF_Handle client, RF_GlobalEvent events, void *arg)
+                 /* PA enable --> HIGH PA
+                  * LNA enable --> 2.4 GHz
+                  */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_RFC_GPO0);
+                 /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+                          de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
++                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
+             } else {
+                 /* RF core active --> 2.4 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
++                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
+                 PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+             }
+         }
+diff --git a/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c b/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c
+index 269f48b72..cd6c26555 100644
+--- a/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c
++++ b/source/ti/ble5stack/boards/CC1352P_4_LAUNCHXL/CC1352P_4_LAUNCHXL_fxns.c
+@@ -246,16 +246,12 @@ void rfDriverCallback(RF_Handle client, RF_GlobalEvent events, void *arg)
+                 /* PA enable --> HIGH PA
+                  * LNA enable --> 2.4 GHz
+                  */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_RFC_GPO0);
+                 /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+                          de-asserted on CC1352 Rev A. */
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO3);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
++                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
+             } else {
+                 /* RF core active --> 2.4 GHz */
+-                PINCC26XX_setMux(antennaPins, Board_RF_24GHZ, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_GPIO);
+-                PINCC26XX_setMux(antennaPins, Board_RF_SUB1GHZ, PINCC26XX_MUX_GPIO);
++                PINCC26XX_setMux(antennaPins, Board_RF_HIGH_PA, PINCC26XX_MUX_RFC_GPO0);
+                 PINCC26XX_setOutputValue(Board_RF_24GHZ, 1);
+             }
+         }
+diff --git a/source/ti/devices/.meta/templates/ti_devices_CC26XX_config.c.xdt b/source/ti/devices/.meta/templates/ti_devices_CC26XX_config.c.xdt
+index 9e1defe4e..852635663 100644
+--- a/source/ti/devices/.meta/templates/ti_devices_CC26XX_config.c.xdt
++++ b/source/ti/devices/.meta/templates/ti_devices_CC26XX_config.c.xdt
+@@ -155,11 +155,11 @@
+ 
+         % var diohex = inst.dioBootloaderBackdoor.toString(16);
+ // DIO number for boot loader backdoor
+-#define SET_CCFG_BL_CONFIG_BL_PIN_NUMBER                0x`diohex`
++#define SET_CCFG_BL_CONFIG_BL_PIN_NUMBER                0x0E
+ 
+         % if(inst.levelBootloaderBackdoor === 'Active high') {
+ // Active high to open boot loader backdoor
+-#define SET_CCFG_BL_CONFIG_BL_LEVEL                     0x1
++#define SET_CCFG_BL_CONFIG_BL_LEVEL                     0x0
+ 
+         % } else {
+ // Active low to open boot loader backdoor
+@@ -168,12 +168,12 @@
+         % }
+     % } else {
+ // Disabled boot loader backdoor
+-#define SET_CCFG_BL_CONFIG_BL_ENABLE                    0xFF
++#define SET_CCFG_BL_CONFIG_BL_ENABLE                    0xC5
+ 
+     % }
+ % } else {
+ // Disable ROM boot loader
+-#define SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE            0x00
++#define SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE            0xC5
+ % }
+ 
+ % if(inst.setFlashVectorTable) {
+diff --git a/source/ti/devices/cc13x2x7_cc26x2x7/startup_files/ccfg.c b/source/ti/devices/cc13x2x7_cc26x2x7/startup_files/ccfg.c
+index c1174db37..367e94848 100644
+--- a/source/ti/devices/cc13x2x7_cc26x2x7/startup_files/ccfg.c
++++ b/source/ti/devices/cc13x2x7_cc26x2x7/startup_files/ccfg.c
+@@ -213,22 +213,22 @@
+ //#####################################
+ 
+ #ifndef SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE
+-#define SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE            0x00       // Disable ROM boot loader
+-// #define SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE         0xC5       // Enable ROM boot loader
++// #define SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE        0x00       // Disable ROM boot loader
++#define SET_CCFG_BL_CONFIG_BOOTLOADER_ENABLE           0xC5       // Enable ROM boot loader
+ #endif
+ 
+ #ifndef SET_CCFG_BL_CONFIG_BL_LEVEL
+-// #define SET_CCFG_BL_CONFIG_BL_LEVEL                  0x0        // Active low to open boot loader backdoor
+-#define SET_CCFG_BL_CONFIG_BL_LEVEL                     0x1        // Active high to open boot loader backdoor
++#define SET_CCFG_BL_CONFIG_BL_LEVEL                    0x0        // Active low to open boot loader backdoor
++// #define SET_CCFG_BL_CONFIG_BL_LEVEL                 0x1        // Active high to open boot loader backdoor
+ #endif
+ 
+ #ifndef SET_CCFG_BL_CONFIG_BL_PIN_NUMBER
+-#define SET_CCFG_BL_CONFIG_BL_PIN_NUMBER                0xFF       // DIO number for boot loader backdoor
++#define SET_CCFG_BL_CONFIG_BL_PIN_NUMBER               0x0E       // DIO number for boot loader backdoor
+ #endif
+ 
+ #ifndef SET_CCFG_BL_CONFIG_BL_ENABLE
+-// #define SET_CCFG_BL_CONFIG_BL_ENABLE                 0xC5       // Enabled boot loader backdoor
+-#define SET_CCFG_BL_CONFIG_BL_ENABLE                    0xFF       // Disabled boot loader backdoor
++#define SET_CCFG_BL_CONFIG_BL_ENABLE                   0xC5       // Enabled boot loader backdoor
++// #define SET_CCFG_BL_CONFIG_BL_ENABLE                0xFF       // Disabled boot loader backdoor
+ #endif
+ 
+ //#####################################
+diff --git a/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz.json b/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz.json
+index e5932db55..c89280bfd 100644
+--- a/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz.json
++++ b/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz.json
+@@ -34,7 +34,7 @@
+                     "ControlFunction": "Input\/Output",
+                     "Idle": "Input tristate (Default)",
+                     "Tx": "Output high",
+-                    "Rx": "Output high"
++                    "Rx": "Output low"
+                 },
+                 {
+                     "_name": "DIO29",
+diff --git a/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz_highPA.json b/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz_highPA.json
+index 4a243ec06..6428168ca 100644
+--- a/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz_highPA.json
++++ b/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/target_launchxl-cc1352p7_2_4_ghz_highPA.json
+@@ -33,8 +33,8 @@
+                     "_name": "DIO28",
+                     "ControlFunction": "Input\/Output",
+                     "Idle": "Input tristate (Default)",
+-                    "Tx": "Output low",
+-                    "Rx": "Output high"
++                    "Tx": "Output high",
++                    "Rx": "Output low"
+                 },
+                 {
+                     "_name": "DIO29",
+diff --git a/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/targets.json b/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/targets.json
+index b45421c70..9079f738f 100644
+--- a/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/targets.json
++++ b/source/ti/devices/radioconfig/.meta/config/cc1352p7/targets/targets.json
+@@ -32,4 +32,4 @@
+             }
+         ]
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/source/ti/devices/radioconfig/.meta/config/cc1352p7_ble_pg10/targets/targets.json b/source/ti/devices/radioconfig/.meta/config/cc1352p7_ble_pg10/targets/targets.json
+index 7e10fe8b5..e0f3d7f91 100644
+--- a/source/ti/devices/radioconfig/.meta/config/cc1352p7_ble_pg10/targets/targets.json
++++ b/source/ti/devices/radioconfig/.meta/config/cc1352p7_ble_pg10/targets/targets.json
+@@ -25,4 +25,4 @@
+             }
+         ]
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js b/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js
+index 41bb2d088..2fa3c03d9 100644
+--- a/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js
++++ b/source/ti/devices/radioconfig/.meta/rfdesign.syscfg.js
+@@ -61,9 +61,9 @@ const LaunchPadMap = {
+     "LP_CC1352P7-1": "LP_CC1352P7",
+     "LP_CC1352P7-2": "LP_CC1352P7-2_4GHZ"
+ };
+-
++//
+ // Targets with 10 dBm High PA
+-const TargetPA10 = ["LAUNCHXL-CC1352P-4", "LP_CC2652PSIP", "LP_CC1352P7-4",
++const TargetPA10 = ["LAUNCHXL-CC1352P-4", "LP_CC2652PSIP",
+     "LP_CC2651P3, 10DBM", "LP_CC2653P10, 10DBM", "LP_EM_CC1354P10_6",
+     "LP_EM_CC2674P10_RSK", "LP_CC2674P10_RGZ, 10DBM"];
+ 
+@@ -699,15 +699,15 @@ function getTxPowerOptionsDefault(freq, highPA) {
+     if (freq >= 2360) {
+         if (TargetName === "LAUNCHXL-CC1352P-4") {
+             TargetName = "LAUNCHXL-CC1352P1";
+-            Has10dBmPA = false;
++            Has10dBmPA = true;
+         }
+         if (TargetName === "LP_CC1352P7-4") {
+             TargetName = "LP_CC1352P7-1";
+-            Has10dBmPA = false;
++            Has10dBmPA = true;
+         }
+         if (TargetName === "LP_EM_CC1354P10_6") {
+             TargetName = "LP_EM_CC1354P10_1";
+-            Has10dBmPA = false;
++            Has10dBmPA = true;
+         }
+     }
+ 
+diff --git a/source/ti/drivers/.meta/rf/RF.Board.c.xdt b/source/ti/drivers/.meta/rf/RF.Board.c.xdt
+index 972a3f1c0..10cae7a35 100644
+--- a/source/ti/drivers/.meta/rf/RF.Board.c.xdt
++++ b/source/ti/drivers/.meta/rf/RF.Board.c.xdt
+@@ -501,16 +501,13 @@ void __attribute__((weak)) `callbackFxn`AntennaSwitching(RF_Handle client, RF_Gl
+                 /* PA enable --> HIGH PA
+                  * LNA enable --> 2.4 GHz
+                  */
+-                GPIO_setConfigAndMux(CONFIG_RF_24GHZ, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+                 /* Note: RFC_GPO3 is a work-around because the RFC_GPO1 (PA enable signal) is sometimes not
+                          de-asserted on CC1352 Rev A. */
+-                GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO3);
+-                GPIO_setConfigAndMux(CONFIG_RF_SUB1GHZ, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++                GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+             } else {
+                 /* RF core active --> 2.4 GHz */
+-                GPIO_setConfigAndMux(CONFIG_RF_24GHZ, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH, IOC_PORT_GPIO);
+                 GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
+-                GPIO_setConfigAndMux(CONFIG_RF_SUB1GHZ, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++                GPIO_write(CONFIG_RF_HIGH_PA, 1);
+             }
+         }
+ % } else if (antennaSwitchName === "XMSSJJ3G0PA-054") {
+@@ -527,11 +524,11 @@ void __attribute__((weak)) `callbackFxn`AntennaSwitching(RF_Handle client, RF_Gl
+             * - High PA    --> HIGH_PA
+             * - LNA enable --> STANDARD_PA
+             */
+-            GPIO_setConfigAndMux(CONFIG_RF_STANDARD_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+-            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO3);
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+         } else {
+             /* RF Core active --> 5_DBM */
+-            GPIO_write(CONFIG_RF_STANDARD_PA, 1);
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++            GPIO_write(CONFIG_RF_HIGH_PA, 1);
+         }
+ % } else if (antennaSwitchName === "RTC6608OU") {
+         /* Switch off all paths. */
+@@ -547,11 +544,11 @@ void __attribute__((weak)) `callbackFxn`AntennaSwitching(RF_Handle client, RF_Gl
+             * - High PA    --> HIGH PA
+             * - LNA enable --> `antennaPathSupport.displayName`
+             */
+-            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT,IOC_PORT_RFC_GPO3);
+-            GPIO_setConfigAndMux(`antennaPathSupport.pinSymbol`, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO0);
+         } else {
+             /* RF Core active --> `antennaPathSupport.displayName` */
+-            GPIO_write(`antennaPathSupport.pinSymbol`, 1);
++            GPIO_setConfigAndMux(CONFIG_RF_HIGH_PA, GPIO_CFG_OUTPUT, IOC_PORT_GPIO);
++            GPIO_write(CONFIG_RF_HIGH_PA, 1);
+         }
+ % } else {
+         /* No support implemented for antenna switch '`antennaSwitchName`' */
+diff --git a/source/ti/drivers/rf/RFCC26X2_multiMode.c b/source/ti/drivers/rf/RFCC26X2_multiMode.c
+index 9dca62bab..463619f54 100644
+--- a/source/ti/drivers/rf/RFCC26X2_multiMode.c
++++ b/source/ti/drivers/rf/RFCC26X2_multiMode.c
+@@ -2075,6 +2075,7 @@ static void RF_initRadioSetup(RF_Handle handle)
+     /* Decode if High Gain PA is available. */
+     tx20FeatureAvailable = RF_decodeOverridePointers(radioSetup, &pTxPower, &pRegOverride, &pRegOverrideTxStd, &pRegOverrideTx20);
+ 
++    /* */
+     /* Ensure that overrides are in sync with the selected PA. */
+     if (tx20FeatureAvailable && (*pTxPower == RF_TX20_ENABLED))
+     {
+@@ -4421,6 +4422,7 @@ static RF_Stat RF_updatePaConfiguration(RF_RadioSetup* radioSetup, RF_TxPowerTab
+     /* Decode if the frequency band used is Sub-1GHz. */
+     bool sub1GHz = (bool)((RF_LODIVIDER_MASK & radioSetup->common.loDivider) != 0);
+ 
++    /* */
+     /* The new value requires the deault PA. */
+     if (newValue.paType == RF_TxPowerTable_DefaultPA)
+     {
+@@ -5938,6 +5940,7 @@ RF_TxPowerTable_Value RF_getTxPower(RF_Handle handle)
+     /* Decode if High Gain PA is available. */
+     bool tx20FeatureAvailable = RF_decodeOverridePointers(handle->clientConfig.pRadioSetup, &pTxPower, &pRegOverride, &pRegOverrideTxStd, &pRegOverrideTx20);
+ 
++    /* */
+     /* Continue the search for the proper value if the High PA is used. */
+     if (*pTxPower == RF_TX20_ENABLED)
+     {
