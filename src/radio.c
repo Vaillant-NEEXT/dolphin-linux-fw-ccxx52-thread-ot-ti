@@ -115,6 +115,7 @@ struct tx_power_max
 /*
  * Radio command structures that run on the CM0.
  */
+ /* */
 #if defined(SUPPORT_HIGH_PA) || defined(LP_CC2653P10) || defined(LP_EM_CC1354P10_1) || defined(LP_EM_CC1354P10_6)
 static volatile rfc_CMD_RADIO_SETUP_PA_t sRadioSetupCmd;
 #else

@@ -71,6 +71,7 @@ cd $SCRIPT_PATH/../third_party/ti_simplelink_sdk/repo_cc13xx_cc26xx/
 git apply ../../../patch/bootloader-backdoor-custom.patch
 git apply ../../../patch/antanna-path-custom.patch
 git apply ../../../patch/antanna-path-custom-clean.patch
+git apply ../../../patch/antanna-path-custom-clean-DIO.patch
 cd $SCRIPT_PATH/../openthread
 git apply ../../../patch/calib.patch
 cd $SCRIPT_PATH/..
