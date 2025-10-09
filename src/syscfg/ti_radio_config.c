@@ -12,7 +12,6 @@
 #include "ti_radio_config.h"
 #include DeviceFamily_constructPath(rf_patches/rf_patch_cpe_multi_protocol.h)
 
-
 // *********************************************************************************
 //   RF Frontend configuration
 // *********************************************************************************
@@ -44,6 +43,20 @@ RF_TxPowerTable_Entry txPowerTable_2400_pa5[TXPOWERTABLE_2400_PA5_SIZE] =
     {3, RF_TxPowerTable_DEFAULT_PA_ENTRY(47, 1, 0, 36) }, // 0x486F
     {4, RF_TxPowerTable_DEFAULT_PA_ENTRY(32, 0, 0, 65) }, // 0x8220
     {5, RF_TxPowerTable_DEFAULT_PA_ENTRY(46, 0, 0, 59) }, // 0x762E
+    // Imported from txPowerTable_2400_pa5_10
+    {6, RF_TxPowerTable_HIGH_PA_ENTRY(38, 0, 1, 39, 20) }, // 0x144F26
+    {7, RF_TxPowerTable_HIGH_PA_ENTRY(42, 0, 1, 39, 20) }, // 0x144F2A
+    {8, RF_TxPowerTable_HIGH_PA_ENTRY(33, 1, 0, 27, 20) }, // 0x143661
+    {9, RF_TxPowerTable_HIGH_PA_ENTRY(26, 1, 1, 25, 16) }, // 0x10335A
+    {10, RF_TxPowerTable_HIGH_PA_ENTRY(31, 1, 1, 31, 16) }, // 0x103F5F
+    // Imported from txPowerTable_2400_pa20
+    {14, RF_TxPowerTable_HIGH_PA_ENTRY(22, 3, 1, 19, 27) }, // 0x1B27D6
+    {15, RF_TxPowerTable_HIGH_PA_ENTRY(26, 3, 1, 23, 27) }, // 0x1B2FDA
+    {16, RF_TxPowerTable_HIGH_PA_ENTRY(30, 3, 1, 28, 27) }, // 0x1B39DE
+    {17, RF_TxPowerTable_HIGH_PA_ENTRY(37, 3, 1, 39, 27) }, // 0x1B4FE5
+    {18, RF_TxPowerTable_HIGH_PA_ENTRY(32, 3, 1, 35, 48) }, // 0x3047E0
+    {19, RF_TxPowerTable_HIGH_PA_ENTRY(34, 3, 1, 48, 63) }, // 0x3F61E2
+    {20, RF_TxPowerTable_HIGH_PA_ENTRY(53, 3, 1, 58, 63) }, // 0x3F75F5
     RF_TxPowerTable_TERMINATION_ENTRY
 };
 
@@ -73,7 +86,6 @@ RF_TxPowerTable_Entry txPowerTable_2400_pa5_10[TXPOWERTABLE_2400_PA5_10_SIZE] =
     RF_TxPowerTable_TERMINATION_ENTRY
 };
 
-
 // 433 MHz, 13 dBm
 RF_TxPowerTable_Entry txPowerTable_433_pa13[TXPOWERTABLE_433_PA13_SIZE] =
 {
@@ -97,8 +109,6 @@ RF_TxPowerTable_Entry txPowerTable_433_pa13[TXPOWERTABLE_433_PA13_SIZE] =
     RF_TxPowerTable_TERMINATION_ENTRY
 };
 
-
-
 //*********************************************************************************
 //  RF Setting:   IEEE 802.15.4-2006, 250 kbps, OQPSK, DSSS = 1:8
 //
@@ -119,7 +129,7 @@ RF_Mode RF_prop =
 };
 
 // Overrides for CMD_RADIO_SETUP_PA
-uint32_t pOverrides[] =
+uint32_t pOverrides_ieee154_2[] =
 {
     // override_ieee_802_15_4.json
     // Rx: Set LNA bias current offset to +15 to saturate trim to max (default: 0)
@@ -129,7 +139,43 @@ uint32_t pOverrides[] =
     (uint32_t)0xFFFFFFFF
 };
 
+// Overrides for CMD_RADIO_SETUP_PA
+uint32_t pOverrides_ieee154_2TxStd[] =
+{
+    // override_txstd_placeholder.json
+    // TX Standard power override
+    TX_STD_POWER_OVERRIDE(0x762E),
+    // The ANADIV radio parameter based on LO divider and front end settings
+    (uint32_t)0x05320703,
+    // override_txstd_settings.json
+    // IEEE 15.4: Set IPEAK = 3 and DCDC dither off for TX
+    (uint32_t)0x00F388D3,
+    // Set RTIM offset to default for standard PA
+    (uint32_t)0x00008783,
+    // Set synth mux to default value for standard PA
+    (uint32_t)0x050206C3,
+    // Set TXRX pin to 0 in RX and high impedance in idle/TX
+    HW_REG_OVERRIDE(0x60A8,0x0401),
+    (uint32_t)0xFFFFFFFF
+};
 
+// Overrides for CMD_RADIO_SETUP_PA
+uint32_t pOverrides_ieee154_2Tx20[] =
+{
+    // override_tx20_placeholder.json
+    // TX HighPA power override
+    TX20_POWER_OVERRIDE(0x003F75F5),
+    // The ANADIV radio parameter based on LO divider and front end settings
+    (uint32_t)0x01C20703,
+    // override_tx20_settings.json
+    // IEEE 15.4: Set RTIM offset to 3 for high power PA
+    (uint32_t)0x00030783,
+    // IEEE 15.4: Set synth mux for high power PA
+    (uint32_t)0x010206C3,
+    // IEEE 15.4: Set TXRX pin to 0 in RX/TX and high impedance in idle
+    HW_REG_OVERRIDE(0x60A8,0x0001),
+    (uint32_t)0xFFFFFFFF
+};
 
 // CMD_RADIO_SETUP_PA
 // Radio Setup Command for Pre-Defined Schemes
@@ -152,10 +198,10 @@ const rfc_CMD_RADIO_SETUP_PA_t RF_cmdIeeeRadioSetup =
     .config.analogCfgMode = 0x0,
     .config.bNoFsPowerUp = 0x0,
     .config.bSynthNarrowBand = 0x0,
-    .txPower = 0x762E,
-    .pRegOverride = pOverrides,
-    .pRegOverrideTxStd = 0,
-    .pRegOverrideTx20 = 0
+    .txPower = 0xFFFF,
+    .pRegOverride = pOverrides_ieee154_2,
+    .pRegOverrideTxStd = pOverrides_ieee154_2TxStd,
+    .pRegOverrideTx20 = pOverrides_ieee154_2Tx20
 };
 
 // CMD_IEEE_TX

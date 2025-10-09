@@ -40,16 +40,14 @@
 #define SUPPORT_FREQBAND_433
 
 // TX power table size definitions
-#define TXPOWERTABLE_2400_PA5_SIZE 16 // 2400 MHz, 5 dBm
-#define TXPOWERTABLE_2400_PA5_10_SIZE 21 // 2400 MHz, 5 + 10 dBm
-#define TXPOWERTABLE_433_PA13_SIZE 18 // 433 MHz, 13 dBm
+#define TXPOWERTABLE_2400_PA5_SIZE 28       // 2400 MHz, 5 dBm
+#define TXPOWERTABLE_2400_PA5_10_SIZE 21    // 2400 MHz, 5 + 10 dBm
+#define TXPOWERTABLE_433_PA13_SIZE 18       // 433 MHz, 13 dBm
 
 // TX power tables
 extern RF_TxPowerTable_Entry txPowerTable_2400_pa5[]; // 2400 MHz, 5 dBm
 extern RF_TxPowerTable_Entry txPowerTable_2400_pa5_10[]; // 2400 MHz, 5 + 10 dBm
 extern RF_TxPowerTable_Entry txPowerTable_433_pa13[]; // 433 MHz, 13 dBm
-
-
 
 //*********************************************************************************
 //  RF Setting:   IEEE 802.15.4-2006, 250 kbps, OQPSK, DSSS = 1:8
@@ -59,9 +57,11 @@ extern RF_TxPowerTable_Entry txPowerTable_433_pa13[]; // 433 MHz, 13 dBm
 //*********************************************************************************
 
 // PA table usage
-#define TX_POWER_TABLE_SIZE TXPOWERTABLE_2400_PA5_SIZE
+// TODO: fw still use txPowerTable_2400_pa5 don't know why
+// Same behavior observed on rfDiag fw, quite strange! That's why I overwritten txPowerTable_2400_pa5
+#define TX_POWER_TABLE_SIZE TXPOWERTABLE_2400_PA5_10_SIZE
 
-#define txPowerTable txPowerTable_2400_pa5
+#define txPowerTable txPowerTable_2400_pa5_10
 
 // TI-RTOS RF Mode object
 extern RF_Mode RF_prop;
