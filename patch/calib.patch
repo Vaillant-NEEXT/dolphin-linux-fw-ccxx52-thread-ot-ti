@@ -1,0 +1,13 @@
+diff --git a/src/core/config/power_calibration.h b/src/core/config/power_calibration.h
+index d19b132bf..13c5c2c73 100644
+--- a/src/core/config/power_calibration.h
++++ b/src/core/config/power_calibration.h
+@@ -49,7 +49,7 @@
+  * Define as 1 to enable power calibration support.
+  */
+ #ifndef OPENTHREAD_CONFIG_POWER_CALIBRATION_ENABLE
+-#define OPENTHREAD_CONFIG_POWER_CALIBRATION_ENABLE 0
++#define OPENTHREAD_CONFIG_POWER_CALIBRATION_ENABLE 1
+ #endif
+ 
+ /**
