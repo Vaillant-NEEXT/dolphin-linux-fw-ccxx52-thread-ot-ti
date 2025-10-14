@@ -118,11 +118,11 @@ extern const uint_least8_t CONFIG_GPIO_SPI_1_CSN_CONST;
 
 /* Owned by /ti/drivers/RF as  */
 extern const uint_least8_t CONFIG_RF_24GHZ_CONST;
-#define CONFIG_RF_24GHZ 28
+#define CONFIG_RF_24GHZ 29
 
 /* Owned by /ti/drivers/RF as  */
 extern const uint_least8_t CONFIG_RF_HIGH_PA_CONST;
-#define CONFIG_RF_HIGH_PA 29
+#define CONFIG_RF_HIGH_PA 28
 
 /* Owned by /ti/drivers/RF as  */
 extern const uint_least8_t CONFIG_RF_SUB1GHZ_CONST;
