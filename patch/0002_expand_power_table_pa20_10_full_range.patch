@@ -1,0 +1,107 @@
+diff --git a/source/ti/devices/radioconfig/.meta/config/pa_tables/cc13x2_cc26x2_r7/pasettings.json b/source/ti/devices/radioconfig/.meta/config/pa_tables/cc13x2_cc26x2_r7/pasettings.json
+index 8302e318c..0257cf82f 100644
+--- a/source/ti/devices/radioconfig/.meta/config/pa_tables/cc13x2_cc26x2_r7/pasettings.json
++++ b/source/ti/devices/radioconfig/.meta/config/pa_tables/cc13x2_cc26x2_r7/pasettings.json
+@@ -1054,6 +1054,21 @@
+                                     "Value": "0xFFFF",
+                                     "TxHighPa": "0x1B27D6"
+                                 },
++                                {
++                                    "_text": "13",
++                                    "Value": "0xFFFF",
++                                    "TxHighPa": "0x10757C"
++                                },
++                                {
++                                    "_text": "12",
++                                    "Value": "0xFFFF",
++                                    "TxHighPa": "0x106974"
++                                },
++                                {
++                                    "_text": "11",
++                                    "Value": "0xFFFF",
++                                    "TxHighPa": "0x105B6D"
++                                },
+                                 {
+                                     "_text": "10",
+                                     "Value": "0xFFFF",
+@@ -1103,10 +1118,22 @@
+                                     "_text": "0",
+                                     "Value": "0x2C5D"
+                                 },
++                                {
++                                    "_text": "-1",
++                                    "Value": "0x265C"
++                                },
++                                {
++                                    "_text": "-2",
++                                    "Value": "0x1E9A"
++                                },
+                                 {
+                                     "_text": "-3",
+                                     "Value": "0x1899"
+                                 },
++                                {
++                                    "_text": "-4",
++                                    "Value": "0x1897"
++                                },
+                                 {
+                                     "_text": "-5",
+                                     "Value": "0x1695"
+@@ -1115,6 +1142,14 @@
+                                     "_text": "-6",
+                                     "Value": "0x1693"
+                                 },
++                                {
++                                    "_text": "-7",
++                                    "Value": "0x1294"
++                                },
++                                {
++                                    "_text": "-8",
++                                    "Value": "0x10D4"
++                                },
+                                 {
+                                     "_text": "-9",
+                                     "Value": "0x0CD4"
+@@ -1123,18 +1158,42 @@
+                                     "_text": "-10",
+                                     "Value": "0x0AD3"
+                                 },
++                                {
++                                    "_text": "-11",
++                                    "Value": "0x0AD1"
++                                },
+                                 {
+                                     "_text": "-12",
+                                     "Value": "0x0AD0"
+                                 },
++                                {
++                                    "_text": "-13",
++                                    "Value": "0x08CF"
++                                },
++                                {
++                                    "_text": "-14",
++                                    "Value": "0x08CE"
++                                },
+                                 {
+                                     "_text": "-15",
+                                     "Value": "0x06CD"
+                                 },
++                                {
++                                    "_text": "-16",
++                                    "Value": "0x06CC"
++                                },
++                                {
++                                    "_text": "-17",
++                                    "Value": "0x04CB"
++                                },
+                                 {
+                                     "_text": "-18",
+                                     "Value": "0x04CA"
+                                 },
++                                {
++                                    "_text": "-19",
++                                    "Value": "0x04C9"
++                                },
+                                 {
+                                     "_text": "-20",
+                                     "Value": "0x04C8"
