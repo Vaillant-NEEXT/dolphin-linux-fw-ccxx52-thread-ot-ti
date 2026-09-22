@@ -37,8 +37,8 @@
 #define SUPPORT_FREQBAND_2400
 
 // TX power table size definitions
-#define TXPOWERTABLE_2400_PA20_SIZE 28 // 2400 MHz, 20 dBm
-#define TXPOWERTABLE_2400_PA20_10_SIZE 28 // 2400 MHz, 20 + 10 dBm
+#define TXPOWERTABLE_2400_PA20_SIZE 42 // 2400 MHz, 20 dBm
+#define TXPOWERTABLE_2400_PA20_10_SIZE 42 // 2400 MHz, 20 + 10 dBm
 
 // TX power tables
 extern RF_TxPowerTable_Entry txPowerTable_2400_pa20[]; // 2400 MHz, 20 dBm

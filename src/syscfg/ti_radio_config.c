@@ -30,14 +30,25 @@
 RF_TxPowerTable_Entry txPowerTable_2400_pa20[TXPOWERTABLE_2400_PA20_SIZE] =
 {
     {-20, RF_TxPowerTable_DEFAULT_PA_ENTRY(8, 3, 0, 2) }, // 0x04C8
+    {-19, RF_TxPowerTable_DEFAULT_PA_ENTRY(9, 3, 0, 2) }, // 0x04C9
     {-18, RF_TxPowerTable_DEFAULT_PA_ENTRY(10, 3, 0, 2) }, // 0x04CA
+    {-17, RF_TxPowerTable_DEFAULT_PA_ENTRY(11, 3, 0, 2) }, // 0x04CB
+    {-16, RF_TxPowerTable_DEFAULT_PA_ENTRY(12, 3, 0, 3) }, // 0x06CC
     {-15, RF_TxPowerTable_DEFAULT_PA_ENTRY(13, 3, 0, 3) }, // 0x06CD
+    {-14, RF_TxPowerTable_DEFAULT_PA_ENTRY(14, 3, 0, 4) }, // 0x08CE
+    {-13, RF_TxPowerTable_DEFAULT_PA_ENTRY(15, 3, 0, 4) }, // 0x08CF
     {-12, RF_TxPowerTable_DEFAULT_PA_ENTRY(16, 3, 0, 5) }, // 0x0AD0
+    {-11, RF_TxPowerTable_DEFAULT_PA_ENTRY(17, 3, 0, 5) }, // 0x0AD1
     {-10, RF_TxPowerTable_DEFAULT_PA_ENTRY(19, 3, 0, 5) }, // 0x0AD3
     {-9, RF_TxPowerTable_DEFAULT_PA_ENTRY(20, 3, 0, 6) }, // 0x0CD4
+    {-8, RF_TxPowerTable_DEFAULT_PA_ENTRY(20, 3, 0, 8) }, // 0x10D4
+    {-7, RF_TxPowerTable_DEFAULT_PA_ENTRY(20, 2, 0, 9) }, // 0x1294
     {-6, RF_TxPowerTable_DEFAULT_PA_ENTRY(19, 2, 0, 11) }, // 0x1693
     {-5, RF_TxPowerTable_DEFAULT_PA_ENTRY(21, 2, 0, 11) }, // 0x1695
+    {-4, RF_TxPowerTable_DEFAULT_PA_ENTRY(23, 2, 0, 12) }, // 0x1897
     {-3, RF_TxPowerTable_DEFAULT_PA_ENTRY(25, 2, 0, 12) }, // 0x1899
+    {-2, RF_TxPowerTable_DEFAULT_PA_ENTRY(26, 2, 0, 15) }, // 0x1E9A
+    {-1, RF_TxPowerTable_DEFAULT_PA_ENTRY(28, 1, 0, 19) }, // 0x265C
     {0, RF_TxPowerTable_DEFAULT_PA_ENTRY(29, 1, 0, 22) }, // 0x2C5D
     {1, RF_TxPowerTable_DEFAULT_PA_ENTRY(33, 1, 0, 25) }, // 0x3261
     {2, RF_TxPowerTable_DEFAULT_PA_ENTRY(38, 1, 0, 31) }, // 0x3E66
@@ -49,6 +60,9 @@ RF_TxPowerTable_Entry txPowerTable_2400_pa20[TXPOWERTABLE_2400_PA20_SIZE] =
     {8, RF_TxPowerTable_HIGH_PA_ENTRY(26, 1, 1, 25, 16) }, // 0x10335A
     {9, RF_TxPowerTable_HIGH_PA_ENTRY(31, 1, 1, 31, 16) }, // 0x103F5F
     {10, RF_TxPowerTable_HIGH_PA_ENTRY(38, 1, 1, 39, 16) }, // 0x104F66
+    {11, RF_TxPowerTable_HIGH_PA_ENTRY(45, 1, 1, 45, 16) }, // 0x105B6D
+    {12, RF_TxPowerTable_HIGH_PA_ENTRY(52, 1, 1, 52, 16) }, // 0x106974
+    {13, RF_TxPowerTable_HIGH_PA_ENTRY(60, 1, 1, 58, 16) }, // 0x10757C
     {14, RF_TxPowerTable_HIGH_PA_ENTRY(22, 3, 1, 19, 27) }, // 0x1B27D6
     {15, RF_TxPowerTable_HIGH_PA_ENTRY(26, 3, 1, 23, 27) }, // 0x1B2FDA
     {16, RF_TxPowerTable_HIGH_PA_ENTRY(30, 3, 1, 28, 27) }, // 0x1B39DE
@@ -63,14 +77,25 @@ RF_TxPowerTable_Entry txPowerTable_2400_pa20[TXPOWERTABLE_2400_PA20_SIZE] =
 RF_TxPowerTable_Entry txPowerTable_2400_pa20_10[TXPOWERTABLE_2400_PA20_10_SIZE] =
 {
     {-20, RF_TxPowerTable_DEFAULT_PA_ENTRY(8, 3, 0, 2) }, // 0x04C8
+    {-19, RF_TxPowerTable_DEFAULT_PA_ENTRY(9, 3, 0, 2) }, // 0x04C9
     {-18, RF_TxPowerTable_DEFAULT_PA_ENTRY(10, 3, 0, 2) }, // 0x04CA
+    {-17, RF_TxPowerTable_DEFAULT_PA_ENTRY(11, 3, 0, 2) }, // 0x04CB
+    {-16, RF_TxPowerTable_DEFAULT_PA_ENTRY(12, 3, 0, 3) }, // 0x06CC
     {-15, RF_TxPowerTable_DEFAULT_PA_ENTRY(13, 3, 0, 3) }, // 0x06CD
+    {-14, RF_TxPowerTable_DEFAULT_PA_ENTRY(14, 3, 0, 4) }, // 0x08CE
+    {-13, RF_TxPowerTable_DEFAULT_PA_ENTRY(15, 3, 0, 4) }, // 0x08CF
     {-12, RF_TxPowerTable_DEFAULT_PA_ENTRY(16, 3, 0, 5) }, // 0x0AD0
+    {-11, RF_TxPowerTable_DEFAULT_PA_ENTRY(17, 3, 0, 5) }, // 0x0AD1
     {-10, RF_TxPowerTable_DEFAULT_PA_ENTRY(19, 3, 0, 5) }, // 0x0AD3
     {-9, RF_TxPowerTable_DEFAULT_PA_ENTRY(20, 3, 0, 6) }, // 0x0CD4
+    {-8, RF_TxPowerTable_DEFAULT_PA_ENTRY(20, 3, 0, 8) }, // 0x10D4
+    {-7, RF_TxPowerTable_DEFAULT_PA_ENTRY(20, 2, 0, 9) }, // 0x1294
     {-6, RF_TxPowerTable_DEFAULT_PA_ENTRY(19, 2, 0, 11) }, // 0x1693
     {-5, RF_TxPowerTable_DEFAULT_PA_ENTRY(21, 2, 0, 11) }, // 0x1695
+    {-4, RF_TxPowerTable_DEFAULT_PA_ENTRY(23, 2, 0, 12) }, // 0x1897
     {-3, RF_TxPowerTable_DEFAULT_PA_ENTRY(25, 2, 0, 12) }, // 0x1899
+    {-2, RF_TxPowerTable_DEFAULT_PA_ENTRY(26, 2, 0, 15) }, // 0x1E9A
+    {-1, RF_TxPowerTable_DEFAULT_PA_ENTRY(28, 1, 0, 19) }, // 0x265C
     {0, RF_TxPowerTable_DEFAULT_PA_ENTRY(29, 1, 0, 22) }, // 0x2C5D
     {1, RF_TxPowerTable_DEFAULT_PA_ENTRY(33, 1, 0, 25) }, // 0x3261
     {2, RF_TxPowerTable_DEFAULT_PA_ENTRY(38, 1, 0, 31) }, // 0x3E66
@@ -82,6 +107,9 @@ RF_TxPowerTable_Entry txPowerTable_2400_pa20_10[TXPOWERTABLE_2400_PA20_10_SIZE] 
     {8, RF_TxPowerTable_HIGH_PA_ENTRY(26, 1, 1, 25, 16) }, // 0x10335A
     {9, RF_TxPowerTable_HIGH_PA_ENTRY(31, 1, 1, 31, 16) }, // 0x103F5F
     {10, RF_TxPowerTable_HIGH_PA_ENTRY(38, 1, 1, 39, 16) }, // 0x104F66
+    {11, RF_TxPowerTable_HIGH_PA_ENTRY(45, 1, 1, 45, 16) }, // 0x105B6D
+    {12, RF_TxPowerTable_HIGH_PA_ENTRY(52, 1, 1, 52, 16) }, // 0x106974
+    {13, RF_TxPowerTable_HIGH_PA_ENTRY(60, 1, 1, 58, 16) }, // 0x10757C
     {14, RF_TxPowerTable_HIGH_PA_ENTRY(22, 3, 1, 19, 27) }, // 0x1B27D6
     {15, RF_TxPowerTable_HIGH_PA_ENTRY(26, 3, 1, 23, 27) }, // 0x1B2FDA
     {16, RF_TxPowerTable_HIGH_PA_ENTRY(30, 3, 1, 28, 27) }, // 0x1B39DE
